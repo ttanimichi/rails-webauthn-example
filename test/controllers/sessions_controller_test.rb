@@ -11,8 +11,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should delete destroy" do
+  test "should redirect destroy without current user" do
     delete session_url
-    assert_response :success
+
+    assert_redirected_to new_session_url
   end
 end
