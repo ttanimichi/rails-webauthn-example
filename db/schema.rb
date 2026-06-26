@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_064108) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_26_084208) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
+    t.string "webauthn_user_handle"
+    t.index ["webauthn_user_handle"], name: "index_users_on_webauthn_user_handle", unique: true
   end
 end
