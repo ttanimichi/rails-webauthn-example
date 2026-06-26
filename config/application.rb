@@ -12,10 +12,9 @@ require "action_controller/railtie"
 # require "action_text/engine"
 require "action_view/railtie"
 # require "action_cable/engine"
-require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# you've limited to :development or :production.
 Bundler.require(*Rails.groups)
 
 module RailsWebauthnExample
@@ -36,7 +35,9 @@ module RailsWebauthnExample
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework nil
+      g.system_tests nil
+    end
   end
 end
