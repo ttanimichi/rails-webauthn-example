@@ -1,2 +1,7 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1>ログイン</h1>
+
+<%= form_with url: session_path do |form| %>
+  <%= form.label :name, "User name" %>
+  <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username" %>
+  <%= form.submit "続ける" %>
+<% end %>
