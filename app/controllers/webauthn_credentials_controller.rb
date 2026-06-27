@@ -2,9 +2,12 @@ class WebauthnCredentialsController < ApplicationController
   # Credential Registration: Verification phase
   def create
     challenge = session.delete(:creation_challenge)
-    return render json: { error: "Registration challenge is missing." }, status: :unprocessable_entity unless challenge
+    unless challenge
+      render json: { error: "Registration challenge is missing." }, status: :unprocessable_entity
+      return
+    end
 
-    webauthn_credential = WebAuthn::Credential.from_create(params.require(:credential).to_unsafe_h)
+    webauthn_credential = WebAuthn::Credential.from_create(create_params)
     webauthn_credential.verify(challenge, user_verification: true)
 
     current_user.webauthn_credentials.create!(
@@ -36,5 +39,11 @@ class WebauthnCredentialsController < ApplicationController
     session[:creation_challenge] = options.challenge
 
     render json: options
+  end
+
+  private
+
+  def create_params
+    params.expect(credential: {}).to_h
   end
 end
