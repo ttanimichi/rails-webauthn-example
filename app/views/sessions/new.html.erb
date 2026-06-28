@@ -1,10 +1,9 @@
 <h1>ログイン</h1>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.label :name, "User name" %>
-  <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username" %>
-  <%= form.submit "続ける" %>
-<% end %>
+<button type="button" id="webauthn-registration" data-options-url="<%= options_webauthn_credentials_path %>" data-create-url="<%= webauthn_credentials_path %>">
+  パスキーを登録
+</button>
+<p id="webauthn-registration-status"></p>
 
 <button type="button" id="webauthn-authentication" data-options-url="<%= options_webauthn_session_path %>" data-create-url="<%= webauthn_session_path %>">
   パスキーでログイン

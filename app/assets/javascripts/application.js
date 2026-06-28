@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!verificationResponse.ok) throw new Error("パスキーを登録できませんでした。")
 
-      registrationStatus.textContent = "パスキーを登録しました。"
+      window.location.assign("/")
     } catch (error) {
       registrationStatus.textContent = error.name === "NotAllowedError" ? "パスキーの登録をキャンセルしました。" : error.message
     } finally {
