@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
+  resource :webauthn_session, only: :create do
+    post :options
+  end
   resources :webauthn_credentials, only: :create do
     post :options, on: :collection
   end

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_or_create_by!(name: params.require(:name))
-    session[:user_id] = user.id
+    sign_in(user)
 
     redirect_to root_path
   rescue ActiveRecord::RecordInvalid => error
