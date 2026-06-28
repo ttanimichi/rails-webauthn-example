@@ -60,7 +60,7 @@ class WebauthnCredentialsController < ApplicationController
       User.find(session[:registration_user_id])
     else
       User.create!(
-        name: "Demo User #{SecureRandom.hex(4)}",
+        name: "User #{Time.current.strftime("%Y-%m-%d %H-%M-%S")}",
         webauthn_user_handle: WebAuthn.generate_user_id
       ).tap { |user| session[:registration_user_id] = user.id }
     end
