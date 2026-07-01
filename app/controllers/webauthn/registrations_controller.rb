@@ -21,6 +21,7 @@ class Webauthn::RegistrationsController < ApplicationController
 
     reset_session
     sign_in(user)
+    store_webauthn_metadata(webauthn_credential)
 
     head :created
   rescue WebAuthn::Error, ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid => error

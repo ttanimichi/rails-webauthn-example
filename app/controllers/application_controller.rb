@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  helper_method :current_user
+  helper_method :current_user, :current_webauthn_metadata
 
   private
 
@@ -15,6 +15,22 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     session[:user_id] = user.id
     @current_user = user
+  end
+
+  def current_webauthn_metadata
+    session[:webauthn_metadata] || {}
+  end
+
+  def store_webauthn_metadata(webauthn_credential)
+    response = webauthn_credential.response
+
+    session[:webauthn_metadata] = {
+      aaguid: response.respond_to?(:aaguid) ? response.aaguid : nil,
+      authenticator_attachment: webauthn_credential.authenticator_attachment,
+      transports: response.respond_to?(:transports) ? response.transports : nil,
+      backup_eligible: webauthn_credential.backup_eligible?,
+      backed_up: webauthn_credential.backed_up?
+    }.compact
   end
 
   def require_login

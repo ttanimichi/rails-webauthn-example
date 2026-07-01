@@ -29,6 +29,7 @@ class Webauthn::AuthenticationsController < ApplicationController
 
     reset_session
     sign_in(user)
+    store_webauthn_metadata(webauthn_credential)
 
     head :no_content
 
