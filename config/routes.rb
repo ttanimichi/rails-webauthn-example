@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :session, only: %i[new create destroy]
+  resource :session, only: %i[new destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
