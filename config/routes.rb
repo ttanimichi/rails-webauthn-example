@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   resource :session, only: %i[new destroy]
-  resource :webauthn_session, only: :create do
-    post :options
-  end
-  resources :webauthn_credentials, only: :create do
-    post :options, on: :collection
+
+  namespace :webauthn do
+    resource :registration, only: :create do
+      post :options
+    end
+
+    resource :authentication, only: :create do
+      post :options
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -1,11 +1,11 @@
 <h1>ログイン</h1>
 
-<button type="button" id="webauthn-registration" data-options-url="<%= options_webauthn_credentials_path %>" data-create-url="<%= webauthn_credentials_path %>">
+<button type="button" id="webauthn-registration" data-options-url="<%= options_webauthn_registration_path %>" data-create-url="<%= webauthn_registration_path %>">
   パスキーを登録
 </button>
 <p id="webauthn-registration-status"></p>
 
-<button type="button" id="webauthn-authentication" data-options-url="<%= options_webauthn_session_path %>" data-create-url="<%= webauthn_session_path %>">
+<button type="button" id="webauthn-authentication" data-options-url="<%= options_webauthn_authentication_path %>" data-create-url="<%= webauthn_authentication_path %>">
   パスキーでログイン
 </button>
 <p id="webauthn-authentication-status"></p>

@@ -1,4 +1,4 @@
-class WebauthnCredentialsController < ApplicationController
+class Webauthn::RegistrationsController < ApplicationController
   skip_before_action :require_login
 
   # Credential Registration: Verification phase
