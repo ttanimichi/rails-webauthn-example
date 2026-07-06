@@ -36,7 +36,11 @@ class Webauthn::RegistrationsController < ApplicationController
     # ref. https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions
     creation_options = WebAuthn::Credential.options_for_create(
       user: { id: user.webauthn_user_handle, name: user.name },
+
+      # excludeCredentials
+      # ref. https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#excludecredentials
       exclude: user.webauthn_credentials.pluck(:credential_id),
+
       # Authenticator Selection Criteria
       # ref. https://www.w3.org/TR/webauthn-3/#dictdef-authenticatorselectioncriteria
       authenticator_selection: {
