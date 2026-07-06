@@ -1,2 +1,11 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>パスキーでログインしました</h1>
+
+<p>user.name: <%= current_user.name %></p>
+
+<% if current_webauthn_metadata.any? %>
+  <% current_webauthn_metadata.each do |name, value| %>
+    <p><%= name %>: <%= value.is_a?(Array) ? value.join(", ") : value %></p>
+  <% end %>
+<% end %>
+
+<%= button_to "ログアウト", session_path, method: :delete %>

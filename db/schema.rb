@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_064108) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_26_113245) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
+    t.string "webauthn_user_handle"
+    t.index ["webauthn_user_handle"], name: "index_users_on_webauthn_user_handle", unique: true
   end
+
+  create_table "webauthn_credentials", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "credential_id", null: false
+    t.text "public_key", null: false
+    t.integer "sign_count", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["credential_id"], name: "index_webauthn_credentials_on_credential_id", unique: true
+    t.index ["user_id"], name: "index_webauthn_credentials_on_user_id"
+  end
+
+  add_foreign_key "webauthn_credentials", "users"
 end
